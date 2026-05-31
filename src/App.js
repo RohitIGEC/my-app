@@ -1,22 +1,26 @@
-import { useState } from "react";
-
-function LikeButton() {
-  let [likes, setLikes] = useState(0);
-
-  return (
-    <div>
-      <h2>Likes: {likes}</h2>
-      <button onClick={() => setLikes(likes + 1)}>
-        Like ❤️
-      </button>
-    </div>
-  );
-}
+import { useState, useEffect } from "react";
 
 function App() {
+  let [joke, setJoke] = useState("Loading...");
+
+  function getJoke() {
+    setJoke("Loading...");
+    fetch("https://official-joke-api.appspot.com/random_joke")
+      .then(response => response.json())
+      .then(data => {
+        setJoke(data.setup + " ... " + data.punchline);
+      });
+  }
+
+  useEffect(() => {
+    getJoke();
+  }, []);
+
   return (
     <div>
-      <LikeButton />
+      <h1>Random Joke!</h1>
+      <p>{joke}</p>
+      <button onClick={getJoke}>new Joke!</button>
     </div>
   );
 }
