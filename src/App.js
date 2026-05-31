@@ -1,23 +1,32 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./Home";
-import About from "./About";
-import Contact from "./Contact";
+import { useContext } from "react";
+import UserProvider, { UserContext } from "./UserContext";
+
+function Header() {
+  let { user } = useContext(UserContext);
+  return <h1>Hello, {user}! 👋</h1>;
+}
+
+function Footer() {
+  let { user } = useContext(UserContext);
+  return <p>Logged in as: {user}</p>;
+}
+
+function ChangeName() {
+  let { setUser } = useContext(UserContext);
+  return (
+    <button onClick={() => setUser("Priya")}>
+      Name Change 
+    </button>
+  );
+}
 
 function App() {
   return (
-    <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link> | 
-        <Link to="/about"> About</Link> | 
-        <Link to="/contact"> Contact</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </BrowserRouter>
+    <UserProvider>
+      <Header />
+      <ChangeName />
+      <Footer />
+    </UserProvider>
   );
 }
 
