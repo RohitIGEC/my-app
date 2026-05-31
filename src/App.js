@@ -1,26 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
-  let [joke, setJoke] = useState("Loading...");
-
-  function getJoke() {
-    setJoke("Loading...");
-    fetch("https://official-joke-api.appspot.com/random_joke")
-      .then(response => response.json())
-      .then(data => {
-        setJoke(data.setup + " ... " + data.punchline);
-      });
-  }
-
-  useEffect(() => {
-    getJoke();
-  }, []);
+  let [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div>
-      <h1>Random Joke!</h1>
-      <p>{joke}</p>
-      <button onClick={getJoke}>new Joke!</button>
+      {isLoggedIn ? (
+        <h1>Welcome Back! 👋</h1>
+      ) : (
+        <h1>Please Login! 🔒</h1>
+      )}
+
+      <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
+        {isLoggedIn ? "Logout" : "Login"}
+      </button>
     </div>
   );
 }
