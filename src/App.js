@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Home from "./Home";
+import About from "./About";
+import Contact from "./Contact";
 
 function App() {
-  let [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
-    <div>
-      {isLoggedIn ? (
-        <h1>Welcome Back! 👋</h1>
-      ) : (
-        <h1>Please Login! 🔒</h1>
-      )}
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Home</Link> | 
+        <Link to="/about"> About</Link> | 
+        <Link to="/contact"> Contact</Link>
+      </nav>
 
-      <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
-        {isLoggedIn ? "Logout" : "Login"}
-      </button>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
