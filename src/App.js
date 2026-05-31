@@ -1,39 +1,22 @@
-/*
-function Header() {
+import { useState } from "react";
+
+function LikeButton() {
+  let [likes, setLikes] = useState(0);
+
   return (
     <div>
-      <h1>Mera App!</h1>
-      <p>Welcome!</p>
+      <h2>Likes: {likes}</h2>
+      <button onClick={() => setLikes(likes + 1)}>
+        Like ❤️
+      </button>
     </div>
   );
 }
 
-// 
 function App() {
   return (
     <div>
-      <Header />
-      <Header />
-      <Header />
-    </div>
-  );
-}
-
-export default App;  */
-
-
-function App() {
-  return (
-    <div>
-      {}
-      <h1 className="title">Hello!</h1>
-
-      {}
-      <p>{2 + 2}</p>
-
-      {}
-      <p>Paragraph 1</p>
-      <p>Paragraph 2</p>
+      <LikeButton />
     </div>
   );
 }
